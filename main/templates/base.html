@@ -1,0 +1,1224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obuca I Odeca</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images.logo.png' %}"/>
+             <!-- Link to css -->
+             <link rel="stylesheet" href="{% static 'css/style.css' %}">
+             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+             <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+    :root{
+    --main: #ff7f50;
+    --varnning: #fa983a;
+    --danger: #e55039;
+    --main-trans-01: hsla(16, 100%, 66%, .1);
+    --main-trans-02: hsla(16, 100%, 66%, .2);
+    --main-trans-03: hsla(16, 100%, 66%, .3);
+    --main-trans-04: hsla(16, 100%, 66%, .4);
+    --main-trans-05: hsla(16, 100%, 66%, .5);
+    --header: #2e2e2e;
+    --text: #4e4e4e;
+    --label: #6e6e6e;
+    --border: #8f8f8f;
+    --dark-theme-border: #8e8e8e;
+    --bg-light: #ddd;
+    --space-big: 32px;
+    --space-mid: 24px;
+    --space-sm: 12px;
+    --font-big: 16px;
+    --font-mid: 14px;
+    --font-sm: 12px;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    list-style: none;
+    color: var(--header);
+    transition: .2s;
+}
+.mb-12{
+    margin-bottom: var(--space-sm);
+}
+.mt-12{
+    margin-top: var(--space-sm);
+}
+.mb-24{
+    margin-bottom: var(--space-mid);
+}
+.mt-24{
+    margin-top: var(--space-mid);
+}
+.mt-32{
+    margin-top: var(--space-big);
+}
+.mb-32{
+    margin-bottom: var(--space-big);
+}
+.p-32{
+    padding: var(--space-big);
+}
+.p-24{
+    padding: var(--space-mid);
+}
+.p-12{
+    padding: var(--space-sm);
+}
+.pnd-24{
+    padding: 24px 24px 0px 24px;
+}
+.theme-toggle{
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    z-index: 999;
+    background: #8e8e8e;
+    width: 50px;
+    height: 24px;
+    border-radius: 12px;
+}
+.toggle-btn{
+    position: relative;
+    width: 20px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: .5s;
+}
+.dark-theme .toggle-btn{
+    left: 26px;
+}
+#side{
+    position: fixed;
+    left: 0;
+    top: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    width: 240px;
+    padding-top: 32px;
+    /* background: #000; */
+    z-index: 1000;
+    border-right: 1px solid var(--bg-light);
+}
+.logo{
+    position: relative;
+    padding-left: 32px;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+.logo-image{
+    width: 40px;
+    height: 40px;
+}
+.logo-big{
+    width: 80px;
+    margin-right: var(--space-mid);
+}
+.logo i{
+    margin-right: var(--space-sm);
+    color: var(--main);
+}
+.logo a{
+    margin-right: 60px;
+}
+.logo .fa-bars{
+    color: var(--header);
+    padding: 0;
+    margin: 0;
+    margin-right: 2px;
+    display: none;
+}
+.fa-times{
+    animation: rotation .3s ease-out;
+}
+@keyframes rotation {
+    to{
+        rotate: 180deg;
+    }
+}
+.navbar{
+    position: relative;
+    margin-top: 120px;
+}
+.nav-link{
+    position: relative;
+    display: block;
+    padding: 12px 0 12px 32px;
+    font-size: var(--font-mid);
+    font-weight: 700;
+    width: 240px;
+    display: flex;
+    justify-content: start;
+    /* background: #e0e0e0; */
+}
+.nav-link i{
+    position: relative;
+    width: 40px;
+    /* background: #a52727; */
+}
+.nav-link p{
+    position: relative;
+    text-align: left;
+    /* background: #000; */
+}
+.nav-active{
+    background: var(--main);
+    border-right: 4px solid var(--text);
+}
+.profile-info{
+    position: relative;
+    width: 100%;
+    margin-bottom: var(--space-mid);
+}
+.done{
+    display: block;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+    padding: 0 12px;
+    /* background: var(--main); */
+}
+.korpa{
+    position: relative;
+}
+.item-num{
+    position: absolute;
+    top: 5px;
+    left: 210px;
+    width: 18px;
+    height: 18px;
+    background: var(--danger);
+    border-radius: 50%;
+    color: var(--bg-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-sm);
+    font-weight: 500;
+}
+.send{
+    position: relative;
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px; 
+    background: var(--main);
+    margin-bottom: 24px;
+    border-radius: 3px;
+}
+.done i, .send i{
+    width: 40px;
+}
+.profile{
+    position: relative;
+    width: 100%;
+    padding: 0 12px;
+    /* background: #bfbfbf; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.profile p{
+    font-size: var(--font-mid);
+    position: relative;
+    font-weight: 700;
+}
+.profile i{
+    font-size: var(--font-mid);
+}
+/* .profile-img{
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-image: url('profile.jpg');
+    background-size: cover;
+    background-position: center 40%;
+} */
+#home{
+    position: relative;
+    min-height: 100vh;
+    width: calc(100% - 240px);
+    margin-left:240px;
+    background: var(--main-trans-02);
+}
+.home-over{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(100vh - 105px);
+    height: 100%;
+    width: 60%;
+    margin-left: auto;
+    background: linear-gradient(90deg, var(--main-trans-01), var(--main-trans-04));
+    filter: blur(100px);
+}
+.home-up{
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+.home-left{
+    position: relative;
+    height: calc(100vh - 105px);
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 80px;
+}
+.home-header{
+    font-size: 40px;
+    margin-bottom: var(--space-big);
+    font-weight: 700;
+}
+.home-phar{
+    font-size: var(--font-big);
+    font-weight: 500;
+    line-height: 24px;
+    margin-bottom: var(--space-sm);
+}
+.btn-cont{
+    background: transparent;
+}
+
+.home-right{
+    position: relative;
+    width: 60%;
+    height: calc(100vh - 105px);
+    padding: 80px;
+}
+.right-img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.home-down{
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: #ffffff;
+    padding-top: var(--space-big);
+    padding-bottom: var(--space-big);
+}
+.cont{
+    position: relative;
+    font-size: var(--font-mid);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    padding-left: 24px;
+}
+.nike-cont{
+    padding: var(--space-sm);
+    background: var(--main-trans-03);
+    border-radius: 50%;
+    color: var(--main);
+    margin-right: var(--space-sm);
+}
+.nike-cont i{
+    color: var(--main);
+}
+.down-phar{
+    font-weight: 500;
+}
+.label, label{
+    font-size: var(--font-big);
+    font-weight: 700;
+    color: var(--label);
+    margin-bottom: var(--space-sm);
+}
+.phar{
+    font-size: var(--font-mid);
+    font-weight: 500;
+    color: var(--text);
+}
+.bold{
+    font-weight: 700;
+    margin-right: var(--space-mid);
+    width: 300px;
+}
+.btn-cont{
+    background: transparent;
+}
+.btn{
+    display: inline-block;
+    width: max-content;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    font-size: var(--font-big);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
+    color: var(--main);
+    font-weight: 700;
+    background: transparent;
+}
+.btn-color{
+    background: var(--main);
+    color: white;
+}
+.btn-warnning{
+    background: var(--varnning);
+    color: white;
+    
+}
+.btn-danger{
+    background: var(--danger);
+    color: white;
+
+}
+.card-cont{
+    padding: var(--space-mid);
+}
+.card{
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+}
+.card-img{
+    position: relative;
+    height: 450px;
+    width: 40%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.reg-card-img{
+    position: relative;
+    height: 665px !important;
+    width: 40%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.update-card-img{
+    position: relative;
+    height: 496px !important;
+    width: 40%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.new-card-img{
+    position: relative;
+    height: 1160px;
+    width: 40%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.new-card-img img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    object-fit: cover;
+}
+.card-img img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.reg-card-img img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    object-fit: cover;
+}
+.update-card-img img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    object-fit: cover;
+}
+.card-right{
+    padding: var(--space-big);
+    position: relative;
+    height: 100%;
+    width: 60%;
+}
+.card-top{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-big);
+}
+.card-header{
+    font-size: var(--font-big);
+    font-weight: 900;
+}
+.card-top i{
+    font-size: 20px;
+    color: var(--main);
+}
+.card-body{
+    margin: 0;
+    padding: 0;
+    font-size: var(--font-sm);
+    color: var(--label);
+}
+.form-group{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.label, label{
+    font-size: var(--font-mid);
+    margin-bottom: var(--space-sm);
+}
+.input{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 32px;
+    border: none;
+    outline: 2px solid #8e8e8e;
+    font-size: var(--font-mid);
+    padding-left: var(--space-sm);
+    border-radius: 3px;
+    margin-bottom: var(--space-mid);
+}
+input[type=checkbox]{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+}
+#id_velicina, #id_boja{
+    display: flex;
+    gap: var(--space-mid);
+    margin-bottom: var(--space-mid);
+}
+.password{
+    margin-bottom: var(--space-big);
+}
+.message{
+    padding: var(--space-mid);
+    font-size: var(--font-mid);
+    background: var(--main-trans-03);
+    border-radius: 8px;
+    margin-bottom: var(--space-mid);
+}
+
+
+/* Obuca */
+.search-cont{
+    display: flex;
+    align-items: center;
+    padding: 24px 24px 0 24px;
+}
+.search-cont .input{
+    margin: 0;
+    border-radius: 6px 0 0 6px;
+}
+.search-cont .btn{
+    padding: 8px 20px;
+    border-radius: 0 6px 6px 0;
+}
+.prod-card-cont{
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-mid);
+    padding: var(--space-mid);
+}
+.prod-card-cont .card{
+    flex-direction: column;
+    flex:1;
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0;
+}
+.prod-card-cont .card:hover{
+    scale: 1.07
+}
+.prod-card-cont .card-img-cont{
+    position: relative;
+    width: 100%;
+    z-index: 100;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: var(--space-mid);
+}
+.prod-card-cont .prod-image{
+    width: 100%;
+    object-fit: contain;
+    /* max-height: 300px; */
+}
+.prod-card-cont .card-right{
+    padding: 0 24px 24px 24px;
+    position: relative;
+    width: 100%;
+}
+.prod-card-cont .card-top{
+    position: relative;
+    width: 100%;
+    margin-bottom: var(--space-sm);
+    text-align: center;
+}
+.prod-card-cont .card-header{
+    font-size: var(--font-big);
+    font-weight: 900;
+    color: var(--header);
+}
+.prod-card-cont .card-body{
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    padding-bottom: var(--space-sm);
+}
+.prod-card-cont .card-footer{
+    position: relative;
+    width: 100%;
+    /* background: #000; */
+    display: flex;
+    flex: 1;
+    gap: 4px;
+    color: var(--text);
+}
+#card-datails{
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    padding: 4vw 6vw ;
+    background: #fff;
+}
+#card-datails > .card-left {
+    flex: 1;
+    padding: var(--space-big);
+}
+#card-datails > .card-right {
+    flex: 1;
+}
+#card-datails .details-card-header{
+    font-size: 60px;
+    color: var(--main);
+}
+#card-datails .phar{
+    font-size: var(--font-big);
+    border-bottom: 1px solid var(--bg-light);
+    padding-bottom: var(--space-sm);
+}
+#card-datails .phar.opis{
+    line-height: 24px;
+}
+.color-cont{
+    font-size: var(--font-big);
+    border-bottom: 1px solid var(--bg-light);
+}
+.boje{
+    margin-bottom: var(--space-sm);
+}
+.span{
+    padding: 8px 16px;
+    background: var(--main-trans-03);
+    border-radius: 6px;
+    margin-right: var(--space-sm);
+    color: var(--text);
+    display: inline-block;
+    margin-bottom: var(--space-sm);
+}
+.cena-cont{
+    font-size: 32px;
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-big);
+    border-bottom: 1px solid var(--bg-light);
+}
+.cena-span{
+    margin-right: var(--space-sm);
+}
+.cena{
+    color: var(--main);
+}
+.detail-img-cont{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+.arrow-left, .arrow-right{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 8px 12px;
+    border-radius: 50%;
+    background: var(--bg-light);
+    box-shadow: 3px 3px 15px 5px hsla(0, 0%, 0%, 0.3);
+    /* z-index: 10000; */
+    display: none;
+}
+.arrow-left{
+    left: -18px;
+}
+.arrow-right{
+    right: -18px;
+}
+img.img-detail{
+    grid-column: span 2;
+    width: 100%;
+}
+img.img-detail-1{
+    grid-row: 1 / 2 !important;
+    grid-column: 1 / 7 !important;
+    /* width: 100%; */
+}
+.image-modal{
+    border: none;
+    outline: none;
+    margin: auto;
+    width: 55vw;
+    padding: 0 26px;
+    background: #00000000;
+    /* background: #0000006d; */
+    /* box-shadow: 0 0 0 700px #0000006d; */
+}
+.image-modal::backdrop{
+    background-color: hsla(0, 0%, 0%, 0.796);
+}
+.modal-img-cont{
+    width: 100%;
+    height: 100%;
+}
+.modal-close{
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 22px;
+}
+.modal-item{
+    width: 100%;
+    display: none;
+}
+.modal-item-1{
+    display: block;
+}
+#previous, #next{
+    position: absolute;
+    padding: 12px 20px;
+    border-radius: 50%;
+    background: #fff;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    font-size: 24px;
+}
+#previous{
+    left: 0px;
+}
+#next{
+    right: 0px;
+}
+
+.footer-left, .loc, .settings{
+    border: 1px solid var(--bg-light);
+    padding: 8px;
+    border-radius: 3px;
+}
+.footer-left{
+    padding-right: auto;
+    flex: 1;
+    font-weight: 700;
+}
+/* Obuca */
+/* Dark Theme */
+/* Side */
+.dark-theme #side{
+    background: var(--text);
+    color: #fff !important;
+    border-right: 1px solid var(--label);
+}
+
+.dark-theme #side .nav-link p, 
+.dark-theme #side .nav-link i,
+.dark-theme #side .logo a,
+.dark-theme #side .profile p,
+.dark-theme #side .profile i,
+.dark-theme .down-phar, 
+.dark-theme #side .done{
+    color: var(--bg-light) !important;
+}
+.dark-theme #side .send,
+.dark-theme .header{
+    color: #fff;
+}
+.dark-theme .nav-active{
+    border-right: 4px solid var(--bg-light);
+}
+/* Home */
+.dark-theme #home, .dark-theme #home .card-details, .dark-theme #home .home-up{
+    background: var(--header) !important;
+}
+.dark-theme #home .card, .dark-theme #home .home-down{
+    background: var(--text);
+}
+.dark-theme #home .input{
+    background: var(--text);
+    outline: 2px solid var(--label);
+    color: var(--bg-light);
+}
+.dark-theme #home .phar, 
+.dark-theme #home .home-phar, 
+.dark-theme #home .cena-span, 
+.dark-theme #home .span, 
+.dark-theme label{
+    color: var(--bg-light) !important;
+}
+.dark-theme #home .bold, .dark-theme .home-header, .dark-theme .card-header, .dark-theme .footer-left{
+    color: #fff !important;
+}
+.dark-theme #card-datails .phar,
+.dark-theme .color-cont,
+.dark-theme .cena-cont{
+    border-bottom: 1px solid var(--border);
+}
+.dark-theme .footer-left,
+.dark-theme .loc,
+.dark-theme .settings{
+    border: 1px solid var(--border);
+}
+.dark-theme .settings i,
+.dark-theme .loc i{
+    color: var(--bg-light);
+}
+.dark-theme .done i,
+.dark-theme .send i{
+    color: var(--bg-light);
+}
+/* Dark Theme */
+@media (width <= 1600px) {
+    .prod-card-cont{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (width <= 1200px) {
+    .map{
+        width: 0;
+    }
+    #home{
+    width: calc(100vw - 240px);
+    margin-right: 0;
+    }
+    .home-down{
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px 0;
+    }
+    .prod-card-cont{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #card-datails{
+        flex-direction: column;
+        padding: 40px 5vw;
+    }
+    #card-details .card-left{
+        width: 100%;
+        padding: 0;
+    }
+    #card-details .card-right{
+        padding: 0;
+        width: 100% !important;
+    }
+    .card-left{
+        width: 100%;
+        padding: 0 !important;
+    }
+    .card-right{
+        width: 100% !important;
+    }
+    .image-modal{
+        width: 70vw;
+    }
+}
+/* Large devices (desktops, 992px and up) */
+@media (width <= 992px) {
+    .home-header{
+        font-size: 32px;
+    }
+    .home-up{
+        flex-direction: column-reverse;
+    }
+    .home-left{
+        width: 100%;
+        /* height: calc(100vh - 105px); */
+        height: 60vh;
+        padding-left: 24px;
+    }
+    .home-right{
+        width: 100%;
+        height: calc(100vh - 105px);
+        height: 40vh;
+        padding: 0;
+    }
+    .right-img{
+        border-radius: 0;
+        object-fit: cover;
+    }
+    .home-down{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    #home-over{
+        position: absolute;
+        bottom: 0 !important;
+        right: 0;
+        left: 0;
+        /* height: calc(100vh - 105px); */
+        height: 50%;
+        width: 100%;
+        margin-left: auto;
+        background: linear-gradient(var(--main-trans-01), var(--main-trans-03));
+        background: transparent;
+        filter: blur(10px);
+    }
+    .card .card-img, .card .reg-card-img, .card .update-card-img, .card .new-card-img{
+        display: none;
+    }
+    .card .card-right{
+        width: 100%;
+        padding: var(--space-mid);
+    }
+}
+/* Medium devices (tablets, 768px and up) */
+@media (width <= 768px) {
+    #side{
+        /* position: absolute; */
+        left: -200px;
+    }    
+    .nav-link{
+        width: 200px;
+    }
+    #logo .fa-bars{
+        display: block;
+        margin-right: 12px;
+        margin-left: auto;
+        padding: 0;
+    }
+    #home{
+        width: calc(100% - 40px);
+        margin-left: 40px;
+    }
+    #side.active{
+        left: 0;
+    }
+    #side.active .nav-link{
+        width: 240px;
+    }
+    #side.active .logo p{
+        margin-right: 0;
+    }
+    .prod-card-cont{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    #side.active .logo .fa{
+        margin-right: 24px;
+    }
+    .arrow-left, .arrow-right{
+        display: block;
+    }
+    img.img-detail{
+        grid-column: span 6;
+        width: 100%;
+        display: none;
+    }
+    img.img-detail-1{
+        display: block;
+    }
+}
+/* Extra small devices (portrait phones, less than 576px) */
+/* No media query for `xs` since this is the default in Bootstrap */
+
+ /* Small devices (landscape phones, 576px and up) */
+@media (width <= 576px) {
+    .home-down{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .cont{
+        padding-left: 24px;
+    }
+    .home-left{
+        height: 40vh;
+    }
+}
+</style>   
+</head>
+<body>
+    <div class="theme-toggle"><div class="toggle-btn"></div></div>
+    <div class="side" id="side">
+        <div class="side-up">
+
+            <div id="logo" class="logo"><img src="{% static 'images/logo.png' %}" alt="" class="logo-image" style="width: 24px;height: 24px;"/><a href="{% url 'index' %}">
+                Obuca I Odeca
+            </a>
+            <i class="fa fa-bars" aria-hidden="true"></i></div>
+                <nav class="navbar">
+                    <a class="nav-link {% if request.path == '/' %}nav-active{% endif %}" href="{% url 'index' %}" >
+                        <i class="fa-solid fa-house-chimney"></i>
+                        <p>
+                            Pocetna
+                        </p>
+                    </a>
+            <a class="nav-link {% if request.path == '/sva_obuca/' %}nav-active{% endif %}" href="{% url 'sva_obuca' %}"><i class="fa-solid fa-shoe-prints"></i>
+                <p>
+                    Obuca
+                </p>
+            </a>
+            <a class="nav-link {% if request.path == '/sva_odeca/' %}nav-active{% endif %}" href="{% url 'sva_odeca' %}"><i class="fa-solid fa-shirt"></i>
+                <p>
+                    Odeca
+                </p>
+            </a>
+            {% if user.is_superuser %}
+                <a class="nav-link" href="{% url 'admin:index' %}"><i class="fa-solid fa-user-tie"></i>
+                    <p>
+                        Admin Panel
+                    </p>
+                </a>
+                <a class="nav-link {% if request.path == '/kreiraj_obucu/' %}nav-active{% endif %}" href="{% url 'kreiraj_obucu' %}"><i class="fa-solid fa-plus"></i>
+                    <p>
+                        Dodaj Obucu
+                    </p>
+                </a>
+                <a class="nav-link {% if request.path == '/kreiraj_odecu/' %}nav-active{% endif %}" href="{% url 'kreiraj_odecu' %}"><i class="fa-solid fa-plus"></i>
+                    <p>
+                        Dodaj Odecu
+                    </p>
+                </a>
+            {% endif %}
+        </nav>
+    </div>
+        <div class="profile-info">
+            {% if user.is_authenticated %} 
+            <a class="nav-link {% if request.path == '/korpa/' %}nav-active{% endif %}" href="{% url 'korpa' %}"><i class="fa-solid fa-cart-plus"></i>
+                <p>
+                    Moja Korpa
+                </p>
+                {% if request.user.praćenje_set.all %}
+                <div class="item-num">{{ request.user.praćenje_set.all|length }}</div>
+                {% endif %}
+            </a>
+            <a class="nav-link {% if request.path == '/logout/' %}nav-active{% endif %}" href="{% url 'logout' %}"><i class="fa-solid fa-user-large-slash"></i>
+                <p>
+                    Logout
+                </p>
+            </a>
+            <a class="nav-link {% if request.path == '/profile/' %}nav-active{% endif %}" href="{% url 'profile' %}"><i class="fa-solid fa-user-gear"></i>
+                <p>
+                    {{ request.user.username.title }}
+                </p>
+            </a>
+
+            {% else %} 
+            <a class="nav-link {% if request.path == '/register/' %}nav-active{% endif %}" href="{% url 'register' %}"><i class="fa-solid fa-user-plus"></i>
+                <p>
+                    Register
+                </p>
+            </a>
+            <a class="nav-link {% if request.path == '/login/' %}nav-active{% endif %}" href="{% url 'login' %}"><i class="fa-solid fa-user-check"></i>
+                <p>
+                    login
+                </p>
+            </a>
+            <a class="nav-link {% if request.path == '/profile/' %}nav-active{% endif %}" href="{% url 'login' %}"><i class="fa-solid fa-question"></i>
+                <p>
+                    Guest User
+                </p>
+            </a>
+                {% endif %} 
+        </div>
+    </div>
+    <main class="home" id="home">
+        {% block body %}
+        {% endblock %}
+    </main>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        // alert('test')
+// console.log('test')
+const menuBtn = document.querySelector(".fa-bars")
+const side = document.querySelector('#side')
+const home = document.querySelector('#home')
+
+// Theme Toggle
+const toggleBtn = document.querySelector('.theme-toggle')
+
+// Provera da li postoji izabrana tema u lokalnom skladištu pregledača
+const savedTheme = localStorage.getItem('theme');
+
+// Ako postoji sačuvana tema, primeni je na stranicu
+if (savedTheme) {
+    document.body.className = savedTheme
+}
+
+toggleBtn.onclick = () => {
+
+    // Provera trenutne teme
+    const currentTheme = document.body.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme';
+
+    
+    // Čuvanje izabrane teme u lokalnom skladištu
+    localStorage.setItem('theme', currentTheme);
+
+    const savedTheme = localStorage.getItem('theme');
+    document.body.className = savedTheme
+};
+
+menuBtn.onclick = () => {
+    menuBtn.classList.toggle('fa-times')
+    side.classList.toggle('active')
+}
+
+const arrowleft = document.querySelector('#arrow-left')
+const arrowRight = document.querySelector('#arrow-right')
+const detailImages = document.querySelectorAll('.img-detail')
+const detailimageNum = detailImages.length
+
+let curImage = 1
+
+if(arrowleft){
+    arrowleft.onclick = () => {
+        document.querySelector(`.img-detail-${curImage}`).style.display = 'none'
+        curImage--
+        curImage = curImage < 1 ? detailimageNum : curImage
+        document.querySelector(`.img-detail-${curImage}`).style.display = 'block'
+    }
+}
+if(arrowRight){
+    arrowRight.onclick = () => {
+        document.querySelector(`.img-detail-${curImage}`).style.display = 'none'
+        curImage++
+        curImage = curImage > detailimageNum ? 1 : curImage
+        document.querySelector(`.img-detail-${curImage}`).style.display = 'block'
+    }
+}
+
+// Modal
+const imageModal = document.querySelector('[data-modal-image]')
+const imageModalOpen = document.querySelectorAll('.image-modal-open')
+const closeImageModal = document.querySelector('.modal-close')
+
+imageModalOpen.forEach(open => {
+
+    open.onclick = () => {
+        // console.log('open')
+        if(window.innerWidth > 768){
+            imageModal.showModal()
+        }
+    }
+})
+if(closeImageModal){
+
+    closeImageModal.onclick = () =>  imageModal.close()
+}
+if(imageModal){
+
+    imageModal.onclick = (e) => {
+        // alert('test')
+        const dialogDimensions = imageModal.getBoundingClientRect()
+        if(
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+            ) { imageModal.close()}
+        }
+    }
+
+const modalLeft = document.querySelector('#previous')
+const modalRight = document.querySelector('#next')
+const modalImages = document.querySelectorAll('.modal-item')
+const modalimageNum = modalImages.length
+
+let curModalImage = 1
+
+if(modalLeft){
+modalLeft.onclick = () => {
+    // alert('left')
+    // console.log('left')
+    document.querySelector(`.modal-item-${curModalImage}`).style.display = 'none'
+    curModalImage--
+    curModalImage = curModalImage < 1 ? modalimageNum : curModalImage
+    document.querySelector(`.modal-item-${curModalImage}`).style.display = 'block'
+}
+}
+ if(modalRight){
+
+     modalRight.onclick = () => {
+         // alert('left')
+         // console.log('left')
+         document.querySelector(`.modal-item-${curModalImage}`).style.display = 'none'
+         curModalImage++
+         curModalImage = curModalImage > modalimageNum ? 1 : curModalImage
+         document.querySelector(`.modal-item-${curModalImage}`).style.display = 'block'
+        }
+    }
+
+// // Search opcija u sva obuca
+// document.getElementById('search-input').addEventListener('input', function() {
+//     // Čim se unese novo slovo, automatski podnosimo formu
+//     document.getElementById('search-form').submit();
+// });
+
+// const search = document.getElementById("search-input")
+// const searchForm = document.getElementById('search-form')
+
+// search.onkeyup = ()=> searchForm.submit()
+
+// window.onscroll = () => {
+//     if (isSearching) return;
+//     const topOfPage = window.pageYOffset || document.documentElement.scrollTop;
+//     const height = document.documentElement.offsetHeight;
+//     const visible = Math.max(0, height - 205 + topOfPage);
+//     let countVisible = 0
+//     Array.from(document.getElementsByClassName('product')).forEach((prod) => {
+//         const prodHeight = prod.clientHeight ;
+//         const prodTop = prod.offsetTop;
+//         if (prodTop < visible && prodTop + prodHeight > visible) {
+//             countVisible++;
+//             prod.classList.add('visible');
+//         } else {
+//             prod.classList.remove('visible');
+//         }
+//     })
+//     document.getElementById('count-of-products').innerHTML = `Prikazano: ${countVisible}/${document.getElementsByClassName('
+//     document.getElementById('count-of-products').innerHTML = `Prikazano: ${countVisible}/${Array.from(document
+//     document.getElementById('count-of-products').innerHTML = `Ukupno proizvoda: ${document.getElementsByClassName('product
+//     document.getElementById('count-of-visibles').innerText = `Prikazano: ${countVisible}/${productsCount}`
+// };}
+    </script>
+
+</body>
+</html>

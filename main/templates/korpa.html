@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+<div id="home-over" class="home-over"></div>
+    {% if messages%}
+    <div class="card-cont">
+        {% for m in messages %}
+        <div class="message">{{ m }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+<!-- Main -->
+<h1 class="header pnd-24">Vasa korpa</h1>
+<div class="prod-card-cont">
+    {% for o in obuca %}
+    <!-- Card -->
+    <a href="{% url 'detalji_obuce' o.obuca.pk %}">
+
+        <div class="card">
+            <div class="card-img-cont">
+            <img src="{{ o.obuca.glavnaSlika.url }}" alt="" class="prod-image">
+        </div>
+        <div class="card-right">
+            
+            <div class="card-top">
+                <h2 class="card-header">
+                    {{ o.obuca.naziv }}
+                </h2>
+            </div>
+        <div class="card-body">
+            <p class="phar big mb-12"><span class="bold">Marka:</span>{{ o.obuca.marka }}</p>
+            <p class="phar mb-12"><span class="bold">Boje:</span>
+                {% for boja in o.obuca.boja.all %}
+                    {{ boja }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            
+        </div>
+        <div class="card-footer">
+            <div class="footer-left">
+                {{ o.cena }}€
+            </div>
+            <div class="loc"><i class="fa-solid fa-shoe-prints"></i></i>
+            </div>
+            <div class="settings"><i class="fa-solid fa-gear"></i>
+            </div>
+        </div>
+    </div>
+</div>
+</a>
+<!-- Card -->
+{% endfor %}
+
+</div>
+<!-- Main -->
+{% endblock %}

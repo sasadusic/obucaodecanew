@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+    <h1 class="header pnd-24">Obuca I Odeca</h1>
+    {% if messages%}
+    <div class="card-cont">
+        {% for m in messages %}
+        <div class="message">{{ m }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+<div class="card-cont">
+    <!-- Card -->
+    <div class="card">
+            <div class="card-img">
+                <img src="{% static 'images/bg-2.png' %}" alt=“image”>
+            </div>
+            <div class="card-right">
+                
+                <div class="card-top">
+                    <h1 class="card-header">
+                        Login Here
+                    </h1>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username" class="label">Username</label>
+                        <input name="username" type="text" id="username" class="input username" placeholder="Jovan Jovanovic" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="label">Password</label>
+                        <input name="password" type="password" id="password" class="input password" placeholder="********" required>
+                    </div>
+                    <button type="submit" id="submit" class="btn btn-color">Login Here</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Card -->
+</div>
+{% endblock %}

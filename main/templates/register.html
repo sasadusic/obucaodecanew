@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+    <h1 class="header pnd-24">Obuca I Odeca</h1>
+    {% if messages%}
+    <div class="card-cont">
+        {% for m in messages %}
+        <div class="message">{{ m }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+<div class="card-cont">
+    <!-- Card -->
+    <div class="card">
+            <div class="reg-card-img">
+                <img src="{% static 'images/bg-3.jpg' %}" alt=“image”>
+            </div>
+            <div class="card-right">
+                
+                <div class="card-top">
+                    <h1 class="card-header">
+                        Register Here
+                    </h1>
+                </div>
+                <div class="card-body">
+                    {% if form.errors %}
+                    {% for field in form %}
+                    {% if field.errors %}
+                    <div class="message">{{ field.errors }}</div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <form action="{% url 'register' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="firstname" class="label">First Name</label>
+                        {{ form.first_name }}
+                    </div>
+                        <div class="form-group">
+                            <label for="lastname" class="label">Last Name</label>
+                        {{ form.last_name }}
+                    </div>
+                        <div class="form-group">
+                            <label for="email" class="label">Email</label>
+                        {{ form.email }}
+                    </div>
+                        <div class="form-group">
+                            <label for="username" class="label">Username</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="label">Password</label>
+                        {{ form.password1 }}                    </div>
+                        <div class="form-group">
+                            <label for="password2" class="label">Confirm Password</label>
+                            {{ form.password2 }}                    </div>
+                    </div>
+                    <button type="submit" id="submit" class="btn btn-color">Register Here</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Card -->
+</div>
+{% endblock %}

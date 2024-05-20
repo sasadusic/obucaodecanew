@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+    {% if messages%}
+    <div class="card-cont">
+        {% for m in messages %}
+        <div class="message">{{ m }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+<!-- Main -->
+    <div class="home-up">
+
+        <div id="home-over" class="home-over"></div>
+        <div class="home-left">
+            <h1 class="home-header">{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+            <p class="home-phar">First Name: {{ request.user.first_name}}</p>
+            <p class="home-phar">Last Name: {{ request.user.last_name}}</p>
+            <p class="home-phar">Username: {{ request.user.username}}</p>
+            <p class="home-phar">Email: {{ request.user.email}}</p>
+            <div class="btn-cont mt-24">
+                <a href="{% url 'update_profile' %}" class="btn btn-color mb-12">Profile Settings</a>
+                <a href="{% url 'change_password' %}" class="btn btn-warnning">Change Password</a>
+                {% if not user.is_superuser %}
+                <form class="mt-24" method="post" action="{% url 'delete_profile' %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger" onclick="return confirm('Dali ste sigurni da zelite da obrisete svoj profil?');">Delete Profile</button>
+                </form>
+                {% endif %}
+            </div>
+    </div>
+    <div class="home-right">
+        <img src="{% static 'images/bg-4.png' %}" alt="" class="right-img">
+    </div>
+</div>
+<div class="home-down">
+    <div class="cont">
+      <div class="nike-cont"><i class="fa fa-check" aria-hidden="true"></i></div>
+      <p class="down-phar">Odlican Kvalitet<br />Prva Klasa Kvaliteta</p>
+    </div>
+    <div class="cont">
+      <div class="nike-cont"><i class="fa fa-check" aria-hidden="true"></i></div>
+      <p class="down-phar">Uvozna Roba<br />Nemacka Austrija</p>
+    </div>
+    <div class="cont">
+      <div class="nike-cont"><i class="fa fa-check" aria-hidden="true"></i></div>
+      <p class="down-phar">Brendirana Roba<br />Garantovan Kvalitet</p>
+    </div>
+    <div class="cont">
+      <div class="nike-cont"><i class="fa fa-check" aria-hidden="true"></i></div>
+      <p class="down-phar">Poznate Marke<br />Nike, Adidas, Puma</p>
+    </div>
+    <div class="cont">
+      <div class="nike-cont"><i class="fa fa-check" aria-hidden="true"></i></div>
+      <p class="down-phar">Veliki Izbor<br />Vise od 200 Artikala</p>
+    </div>
+  </div>
+<!-- Main -->
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+<div id="home-over" class="home-over"></div>
+    {% if messages%}
+    <div class="card-cont">
+        {% for m in messages %}
+        <div class="message">{{ m }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+<!-- Main -->
+    <!-- Card -->
+    <div id="card-datails" class="card-details">
+        <div class="card-left">
+            <!-- Slike -->
+            <div class="detail-img-cont">
+                <div id="arrow-left" class="arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+                <div id="arrow-right" class="arrow-right"><i class="fa-solid fa-angle-right"></i></div>
+                {% for slika in slike %}
+                <img class="img-detail img-detail-{{ forloop.counter }} image-modal-open" src="{{ slika.slika.url }}" alt="Shoe Image">
+                {% endfor %}
+            </div>
+            <!-- Slike -->
+            <!-- Modal -->
+            <dialog data-modal-image class="image-modal">
+                <div class="modal-close"><i class="fa-solid fa-xmark" style="color: #fff; font-size: 24px;"></i></div>
+                
+                <div class="modal-image-cont">
+                    <div id="previous"><i class="fa-solid fa-chevron-left"></i></div>
+                    <div id="next"><i class="fa-solid fa-angle-right"></i></div>
+                    {% for slika in slike %}
+                <img class="modal-item modal-item-{{ forloop.counter }} active-modal-item" src="{{ slika.slika.url }}" alt="Shoe Image" data-index="{{ forloop.counter }}">
+                {% endfor %}
+                </div>
+              </dialog>
+            <!-- Modal -->
+        </div>
+        <div class="card-right">
+            <div class="card-top">
+                <h2 class="details-card-header">
+                    {{ obuca.naziv }}
+                </h2>
+            </div>
+        <div class="card-body">
+            <p class="phar big mb-12"><span class="bold">Sifra:</span>{{ obuca.sifra }}</p>
+            <p class="phar big mb-12"><span class="bold">Marka:</span>{{ obuca.marka }}</p>
+            <div class="color-cont mb-12"><div class="boje bold">Dostupne boje:</div>
+                {% for boja in obuca.boja.all %}
+                    <div class="span">{{ boja }}</div>{% if not forloop.last %} {% endif %}
+                {% endfor %}
+            </div>
+            <div class="color-cont mb-12"><div class="boje bold">Dostupne velicine:</div>
+                {% for velicina in obuca.velicina.all %}
+                <div class="span">{{ velicina }}</div>{% if not forloop.last %} {% endif %}
+                {% endfor %}
+            </div>
+            <p class="phar opis mb-12"><span class="bold">Opis:</span>{{ obuca.opis }}</p>
+            <div class="cena-cont"><span class="cena-span">Cena:</span><span class="cena bold">{{ obuca.cena }}€</span></div>
+            <p class="phar opis"><span class="bold">Nacin kupovine:</span>{{ nacin.text }}</p>
+            <!-- Korpa -->
+            {% if not prati_obuca %}
+                <a class="btn btn-color mt-24" href="{% url 'prati_obucu' obuca.pk %}">Dodaj u Korpu<i class="fa-solid fa-cart-plus" style="color: #fff;"></i></a>
+            {% else %}
+                <a class="btn btn-color mt-24" href="{% url 'odprati_obucu' obuca.id %}">Izbrisi iz korpe</a>
+            {% endif %}
+            <!-- Korpa -->
+            {% if user.is_superuser %}
+            <a href="{% url 'obrisi_obucu' obuca.pk %}" class="btn btn-danger mt-12 mb-12"  onclick="return confirm('Jesi li siguran');">Obrisi Artikal</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- Card -->
+<!-- Main -->
+{% endblock %}
